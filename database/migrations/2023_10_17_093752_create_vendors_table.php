@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('company_name');
             $table->string('contact_person_name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

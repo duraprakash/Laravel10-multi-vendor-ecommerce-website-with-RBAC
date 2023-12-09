@@ -61,8 +61,22 @@ class RolePermissionSeeder extends Seeder
                 'group_name' => 'profile',
                 'permissions' => [
                     // profile Permissions
+                    'profile.create',
                     'profile.view',
                     'profile.edit',
+                    'profile.delete',
+                    'profile.approve',
+                ]
+            ],
+            [
+                'group_name' => 'article',
+                'permissions' => [
+                    // article Permissions
+                    'article.create',
+                    'article.view',
+                    'article.edit',
+                    'article.delete',
+                    'article.approve',
                 ]
             ],
         ];

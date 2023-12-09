@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class Vendors extends Model
+class Wishlists extends Model
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
@@ -19,8 +19,6 @@ class Vendors extends Model
      */
     protected $fillable = [
         'user_id',
-        'company_name',
-        'contact_person_name',
-        'description',
+        'product_id',
     ];
 }

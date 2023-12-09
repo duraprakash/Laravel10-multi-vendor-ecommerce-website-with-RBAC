@@ -25,20 +25,29 @@ class AdminController extends Controller
         return view('admin.index', compact('roles', 'permissionsByGroup'));
     }
 
-    public function createRole()
+    public function createRole(Role $role)
     {
-        return view('admin.create-role');
+        $roles = Role::all();
+        $permissionsByGroup = Permission::all()->groupBy('group_name');
+        $role->load('permissions');
+        return view('admin.create-role', compact('roles', 'permissionsByGroup', 'role'));
     }
 
-    public function storeRole(Request $request)
+    public function storeRole(Request $request, Role $role)
     {
         $request->validate([
             'name' => 'required|unique:roles,name',
+            'permissions' => 'array',
         ]);
 
-        Role::create(['name' => $request->name]);
+        // Create a new role
+        $newRole = Role::create(['name' => $request->name]);
 
-        return Redirect::route('admin.index');
+        // Sync permissions with the new role
+        $newRole->syncPermissions($request->permissions ?? []);
+
+
+        return Redirect::route('admin.index')->with('success', 'Role created successfully.');
     }
 
     public function editRole(Role $role)
@@ -60,7 +69,7 @@ class AdminController extends Controller
         $role->update(['name' => $request->name]);
         $role->syncPermissions($request->permissions ?? []);
 
-        return Redirect::route('admin.index');
+        return Redirect::route('admin.index')->with('success', 'Role updated successfully.');
     }
 
     public function deleteRole(Role $role)
@@ -72,6 +81,7 @@ class AdminController extends Controller
     {
         $role->delete();
 
-        return Redirect::route('admin.index');
+        // return Redirect::route('admin.index');
+        return redirect()->route('admin.index')->with('success', 'Role deleted successfully.');
     }
 }

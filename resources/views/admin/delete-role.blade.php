@@ -6,7 +6,7 @@
     <div class="container">
         <h1>Delete Role: {{ $role->name }}</h1>
 
-        <form action="{{ route('admin.delete-role', $role->id) }}" method="post">
+        <form action="{{ route('admin.destroy-role', $role->id) }}" method="post">
             @csrf
             @method('delete')
 
