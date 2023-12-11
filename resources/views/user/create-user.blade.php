@@ -5,6 +5,9 @@
     @section('content')
         <div class="container">
             <h1>Create User</h1>
+            <div class="mb-4">
+                <a href="{{ route('user.index') }}" class="btn btn-danger">Go Back</a>
+            </div>
             <!-- Form to create a new user -->
             <form action="{{ route('user.store-user') }}" method="POST">
                 @csrf
@@ -20,17 +23,43 @@
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
+
                 <div class="form-group">
                     <label for="roles">Roles:</label>
-                    <select multiple class="form-control" id="roles" name="roles[]" required>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role->id }}">{{ $role->name }}</option>
-                        @endforeach
-                    </select>
+                    <div class="card-body">
+                        <div class="row border-black">
+                            @foreach ($roles as $role)
+                                <div class="col-md-6 col-sm-6 col-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input permission-checkbox" type="checkbox" name="roles[]"
+                                            value="{{ $role->name }}" data-group="" id="role_{{ $role->id }}">
+                                        <label class="form-check-label permission-label" for="role_{{ $role->id }}">
+                                            {{ $role->name }}
+                                        </label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Create User</button>
+
+                @can('create', \App\Models\User::class)
+                    <div class="mb-4 mt-3">
+                        <button type="submit" class="btn btn-primary">Create User</button>
+                    </div>
+                @endcan
+
             </form>
         </div>
     @endsection
+    <style>
+        .border-black {
+            border: 1px solid black;
+            padding: 15px;
+        }
 
+        .card-body {
+            margin: 0 12px;
+        }
+    </style>
 </div>

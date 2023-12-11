@@ -19,6 +19,12 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{--     
+    <!-- Add your styles here -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <!-- Add your scripts here -->
+    <script src="{{ asset('js/scripts.js') }}" defer></script> --}}
 </head>
 
 <body>

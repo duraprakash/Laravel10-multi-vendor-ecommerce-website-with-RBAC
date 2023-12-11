@@ -3,7 +3,9 @@
 @section('content')
     <div class="container">
         <h1>Edit Role: {{ $role->name }}</h1>
-
+        <div class="mb-4">
+            <a href="{{ route('admin.index') }}" class="btn btn-danger">Go Back</a>
+        </div>
         <form action="{{ route('admin.update-role', $role->id) }}" method="post">
             @csrf
             @method('put')
@@ -11,7 +13,8 @@
             <!-- Role Name Input -->
             <div class="mb-3">
                 <label for="name" class="form-label">Role Name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}" required>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $role->name }}"
+                    required>
             </div>
 
             <h3>Assign Permissions</h3>

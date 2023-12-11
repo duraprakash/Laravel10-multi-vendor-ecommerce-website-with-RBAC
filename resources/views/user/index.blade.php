@@ -13,7 +13,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {{-- <th>ID</th> --}}
+                        <th>Sno.</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Role</th>
@@ -21,32 +22,20 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $count = 1; ?>
                     @foreach ($users as $user)
                         <tr>
-                            <td>{{ $user->id }}</td>
+                            {{-- <td>{{ $user->id }}</td> --}}
+                            <td>{{ $count++ }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ implode(', ', $user->roles->pluck('name')->toArray()) }}</td>
                             <td>
-                                <a href="{{ route('user.edit-user', $user->id) }}" class="btn btn-primary">Edit</a>
-                                <form action="{{ route('user.delete-user', $user->id) }}" method="POST"
-                                    style="display: inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger"
-                                        onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                </form>
-                                @can('edit-user', $user)
-                                    <a href="{{ route('user.edit-user', $user->id) }}" class="btn btn-primary">Edit</a>
+                                @can('update', $user)
+                                    <a href="{{ route('user.edit-user', $user->id) }}" class="btn btn-warning">Edit User</a>
                                 @endcan
-                                @can('delete-user', $user)
-                                    <form action="{{ route('user.delete-user', $user->id) }}" method="POST"
-                                        style="display: inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                            onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
-                                    </form>
+                                @can('delete', $user)
+                                    <a href="{{ route('user.delete-user', $user->id) }}" class="btn btn-danger">Delete User</a>
                                 @endcan
                             </td>
                         </tr>

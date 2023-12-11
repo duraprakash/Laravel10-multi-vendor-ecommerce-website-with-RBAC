@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-// route::method('/url', [ModelController::class, '7CRUD'])->name('folder.blade-file');
+// route::method('/url', [ModelController::class, '7CRUD'])->name('folder.blade-file/route');
 Route::middleware(['auth'])->group(function () {
     Route::prefix('auth')->group(function () {
         Route::get('/users', [UserController::class, 'index'])->name('user.index');
@@ -51,6 +51,6 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit-user');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('user.update-user');
         Route::get('/users/{user}/delete', [UserController::class, 'deleteUser'])->name('user.delete-user');
-        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('user.destroy-user');
+        Route::delete('/users/{user}', [UserController::class, 'destroyUser'])->name('user.destroy-user');
     });
 });

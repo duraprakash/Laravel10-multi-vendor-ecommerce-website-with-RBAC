@@ -12,7 +12,10 @@
 
             <p>Are you sure you want to delete this role?</p>
 
-            <button type="submit" class="btn btn-danger">Delete Role</button>
+            <div class="mb-4">
+                <a href="{{ route('admin.index') }}" class="btn btn-success">Go Back</a>
+                <button type="submit" class="btn btn-danger">Delete Role</button>
+            </div>
         </form>
     </div>
 @endsection

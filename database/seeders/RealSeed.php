@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
-class RolePermissionSeeder extends Seeder
+class RealSeed extends Seeder
 {
     /**
      * Run the database seeds.
@@ -29,14 +29,14 @@ class RolePermissionSeeder extends Seeder
                 ]
             ],
             [
-                'group_name' => 'blog',
+                'group_name' => 'user',
                 'permissions' => [
-                    // Blog Permissions
-                    'blog.create',
-                    'blog.view',
-                    'blog.edit',
-                    'blog.delete',
-                    'blog.approve',
+                    // user Permissions
+                    'user.create',
+                    'user.view',
+                    'user.edit',
+                    'user.delete',
+                    'user.approve',
                 ]
             ],
             [
@@ -59,28 +59,6 @@ class RolePermissionSeeder extends Seeder
                     'role.edit',
                     'role.delete',
                     'role.approve',
-                ]
-            ],
-            [
-                'group_name' => 'profile',
-                'permissions' => [
-                    // profile Permissions
-                    'profile.create',
-                    'profile.view',
-                    'profile.edit',
-                    'profile.delete',
-                    'profile.approve',
-                ]
-            ],
-            [
-                'group_name' => 'article',
-                'permissions' => [
-                    // article Permissions
-                    'article.create',
-                    'article.view',
-                    'article.edit',
-                    'article.delete',
-                    'article.approve',
                 ]
             ],
         ];
