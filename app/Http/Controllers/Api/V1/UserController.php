@@ -30,6 +30,7 @@ class UserController extends Controller
      */
     public function index(User $user)
     {
+        $this->authorize('viewAny', $user);
         // $user->hasPermissionTo('view articles');
         // $usertype = User::all();;
         // return $usertype[1]->name;
