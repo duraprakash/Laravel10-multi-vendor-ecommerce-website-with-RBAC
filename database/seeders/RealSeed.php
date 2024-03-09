@@ -96,6 +96,7 @@ class RealSeed extends Seeder
             'name' => 'User',
             'email' => 'test@gmail.com',
             'profile_image' => 'default.jpg',
+            'last_activity' => time(), // user inactivity
         ]);
         $user->assignRole($role1);
 
@@ -103,6 +104,7 @@ class RealSeed extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'profile_image' => 'default.jpg',
+            'last_activity' => time(),
         ]);
         $user->assignRole($role2);
 
@@ -110,6 +112,7 @@ class RealSeed extends Seeder
             'name' => 'Vendor',
             'email' => 'vendor@gmail.com',
             'profile_image' => 'default.jpg',
+            'last_activity' => time(),
         ]);
         $user->assignRole($role3);
 
@@ -117,6 +120,7 @@ class RealSeed extends Seeder
             'name' => 'Super-Admin',
             'email' => 'superadmin@gmail.com',
             'profile_image' => 'default.jpg',
+            'last_activity' => time(),
         ]);
         $user->assignRole($role4);
     }

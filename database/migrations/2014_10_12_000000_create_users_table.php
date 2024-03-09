@@ -22,6 +22,7 @@ return new class extends Migration
             // $table->string('phone_number')->nullable();
             // $table->text('address')->nullable();
             // $table->enum('role', ['super-admin', 'vendor', 'customer', 'guest'])->default('guest');
+             $table->timestamp('last_activity')->nullable(); // 3. Track user activity
             $table->timestamps();
         });
     }

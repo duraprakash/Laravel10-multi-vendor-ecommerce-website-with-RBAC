@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'profile_image',
         'password',
+        'last_activity', // 4. user inactivity
     ];
 
     /**
@@ -44,6 +45,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'last_activity' => 'datetime', // 4.1 user inactivity
     ];
 
     /**

@@ -32,6 +32,7 @@ class UserController extends Controller
      */
     public function index(User $user)
     {
+        // auth()->user()->update(['last_activity' => now()]); // 5. user inactivity
         $this->authorize('viewAny', $user);
         // $user->hasPermissionTo('view articles');
         // $usertype = User::all();;
