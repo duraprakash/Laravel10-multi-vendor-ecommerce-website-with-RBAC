@@ -5,9 +5,13 @@ namespace App\Providers;
 // use Illuminate\Support\Facades\Gate;
 
 use App\Models\User;
+use App\Models\Vendors;
+use App\Policies\V1\RolePolicy;
 use App\Policies\V1\UserPolicy;
+use App\Policies\V1\VendorPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use Spatie\Permission\Models\Role;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -18,7 +22,9 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // registering the ModelPolicies
+        Role::class => RolePolicy::class,
         User::class => UserPolicy::class,
+        Vendors::class => VendorPolicy::class,
     ];
 
     /**
@@ -35,5 +41,8 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+        // // Register the VendorPolicy for the Vendors model
+        // Gate::resource('vendor', VendorPolicy::class);
     }
 }

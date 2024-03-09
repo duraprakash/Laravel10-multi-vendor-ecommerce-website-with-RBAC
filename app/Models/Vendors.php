@@ -18,9 +18,11 @@ class Vendors extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'id',
         'user_id',
-        'company_name',
+        'vendor_name',
         'contact_person_name',
         'description',
+        'verification_status',
     ];
 }

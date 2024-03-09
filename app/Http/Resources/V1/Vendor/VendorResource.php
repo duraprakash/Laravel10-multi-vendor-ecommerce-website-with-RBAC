@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\V1\User;
+namespace App\Http\Resources\V1\Vendor;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class VendorResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,11 @@ class UserResource extends JsonResource
         // return parent::toArray($request);
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            // 'profile_image' => $this->profile_image,
-            // 'profile_image' => asset('storage/' . $this->profile_image), // Assuming images are stored in the storage folder
-            'profile_image' => asset('upload/user_images/' . $this->profile_image), // Assuming images are stored in the storage folder
+            'user_id' => $this->user_id,
+            'vendor_name' => $this->vendor_name,
+            'contact_person_name' => $this->contact_person_name,
+            'description' => $this->description,
+            'verification_status' => $this->verification_status,
             // 'phone_number' => $this->phone_number,
             // 'address' => $this->address,
             // 'role' => $this->role,

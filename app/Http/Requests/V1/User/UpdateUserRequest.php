@@ -25,6 +25,8 @@ class UpdateUserRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . optional($this->user)->id,
+            // 'profile_image' => 'nullable|string|max:255',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:4096', // Adjust file types and size as needed
             // 'password' => 'required|string|min:6',
             // 'phone_number' => 'nullable|string|max:20',
             // 'address' => 'nullable|string',

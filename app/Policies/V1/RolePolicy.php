@@ -5,8 +5,9 @@ namespace App\Policies\V1;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Spatie\Permission\Models\Role;
 
-class UserPolicy
+class RolePolicy
 {
     use HandlesAuthorization;
 
@@ -15,9 +16,7 @@ class UserPolicy
      */
     public function viewAny(User $user): bool
     {
-        // return $user->hasRole('super-admin');
-        return $user->hasPermissionTo('user.view');
-        // return true;
+        return $user->hasPermissionTo('role.view');
     }
 
     /**
@@ -33,29 +32,29 @@ class UserPolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('user.create');
+        return $user->hasPermissionTo('vendor.create');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, User $model): bool
+    public function update(User $user, Role $model): bool
     {
-        return $user->hasPermissionTo('user.edit');
+        return $user->hasPermissionTo('role.edit');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, User $model): bool
+    public function delete(User $user, Role $model): bool
     {
-        return $user->hasPermissionTo('user.delete');
+        return $user->hasPermissionTo('role.delete');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, User $model): bool
+    public function restore(User $user, Role $model): bool
     {
         //
     }
@@ -63,7 +62,7 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, User $model): bool
+    public function forceDelete(User $user, Role $model): bool
     {
         //
     }

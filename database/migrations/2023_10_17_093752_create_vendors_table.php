@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('vendors', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
+            $table->foreignId('user_id')->constrained(); // foreign key relationship
+            $table->string('vendor_name');
             $table->string('contact_person_name');
             $table->text('description')->nullable();
+            $table->text('verification_status')->nullable();
             $table->timestamps();
         });
     }

@@ -1,0 +1,66 @@
+<!-- This should be placed inside loop,
+make use of script to place outside the loop
+for security, integrity and performance -->
+<!-- Button trigger modal inside loop-->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal-{{ $user->id }}">
+    Update Profile Pic <br>Todo: Saving fun {{ $user->id }}
+</button>
+
+<!-- Vertically centered modal -->
+<form action="{{ route('users.update-profile', $user->id) }}" method="post" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
+    <div class="modal" id="exampleModal-{{ $user->id }}">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalCenterTitle">#1 Update
+                        Profile Pic {{ $user->id }}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This is a vertically centered modal.</p>
+                    <h3>Profile pic found but you are going to update with new one.
+                        <br>Are
+                        you sure?
+                    </h3>
+                    {{ $user->id }}
+                    <label for="profile_image">Profile Image:</label>
+                    <input type="file" class="form-control" id="profile_image" name="profile_image">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!-- inside for loop ends -->
+
+<!-- Button trigger modal outside loop -->
+<button type="button" class="btn btn-warning update-profile-btn" data-user-id="{{ $user->id }}" data-bs-toggle="modal"
+    data-bs-target="#exampleModal">
+    Update Profile Pic <br>Todo: Saving fun {{ $user->id }}
+</button>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var updateProfileForm = document.getElementById('updateProfileForm');
+        var userIdInput = document.getElementById('userId');
+
+        // Add event listener to update form action and modal title when the modal is shown
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var userId = button.data('user-id');
+
+            updateProfileForm.action = "{{ route('users.update-profile', '') }}" + '/' + userId;
+            userIdInput.value = userId;
+            document.getElementById('exampleModalCenterTitle').innerText =
+                'Update Profile Pic Wow! this is fun' +
+                userId;
+        });
+    });
+</script>

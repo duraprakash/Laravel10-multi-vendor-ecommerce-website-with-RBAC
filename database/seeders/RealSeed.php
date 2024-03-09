@@ -61,6 +61,17 @@ class RealSeed extends Seeder
                     'role.approve',
                 ]
             ],
+            [
+                'group_name' => 'vendor',
+                'permissions' => [
+                    // role Permissions
+                    'vendor.create',
+                    'vendor.view',
+                    'vendor.edit',
+                    'vendor.delete',
+                    'vendor.approve',
+                ]
+            ],
         ];
 
         // Insert the permisison with group in the database
@@ -75,27 +86,38 @@ class RealSeed extends Seeder
         }
 
         // Create roles
-        $role1 = Role::create(['name' => 'writer']);
+        $role1 = Role::create(['name' => 'user']);
         $role2 = Role::create(['name' => 'admin']);
-        $role3 = Role::create(['name' => 'super-admin']);
+        $role3 = Role::create(['name' => 'vendor']);
+        $role4 = Role::create(['name' => 'super-admin']);
 
         // create demo users
         $user = \App\Models\User::factory()->create([
             'name' => 'User',
             'email' => 'test@gmail.com',
+            'profile_image' => 'default.jpg',
         ]);
         $user->assignRole($role1);
 
         $user = \App\Models\User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'profile_image' => 'default.jpg',
         ]);
         $user->assignRole($role2);
 
         $user = \App\Models\User::factory()->create([
-            'name' => 'Super-Admin',
-            'email' => 'superadmin@gmail.com',
+            'name' => 'Vendor',
+            'email' => 'vendor@gmail.com',
+            'profile_image' => 'default.jpg',
         ]);
         $user->assignRole($role3);
+
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Super-Admin',
+            'email' => 'superadmin@gmail.com',
+            'profile_image' => 'default.jpg',
+        ]);
+        $user->assignRole($role4);
     }
 }
