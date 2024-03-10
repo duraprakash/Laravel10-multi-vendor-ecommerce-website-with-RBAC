@@ -23,7 +23,7 @@ class CheckUserActivity
             $user = Auth::user();
 
             // Check if the user's last activity time is older than the specified duration (e.g., 30 minutes)
-            if (time() - strtotime($user->last_activity) > 10) { // 30 minutes in seconds, 10 sec used here
+            if (time() - strtotime($user->last_activity) > 120) { // 30 minutes in seconds, 120 sec used here
                 Session::flash('message', 'You have been logged out due to inactivity.');
                 Auth::logout();
                 Session::flush();

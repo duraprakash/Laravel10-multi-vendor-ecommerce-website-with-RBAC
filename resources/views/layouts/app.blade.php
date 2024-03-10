@@ -95,8 +95,9 @@
 
         <main class="py-4">
             <div class="container">
-                @include('flash-message')
+                {{-- @include('flash-message') --}}
                 {{-- @include('errors.error-messages') <!-- Include the error messages partial --> --}}
+                @include('flash-modal-message')
             </div>
             @yield('content')
         </main>
@@ -109,6 +110,34 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
     </script>
+
 </body>
 
 </html>
+
+
+<script>
+    function showMessage(type, message) {
+        if (type == "error") {
+            $('#messageContent').text(message);
+            $('#messageModal').modal('show');
+        } else if (type == "success") {
+            $('#messageContentSuccess').text(message);
+            $('#messageModalSuccess').modal('show');
+        } else if (type == "warning") {
+            $('#messageContentWarning').text(message);
+            $('#messageModalWarning').modal('show');
+        } else if (type == "info") {
+            $('#messageContentInfo').text(message);
+            $('#messageModalInfo').modal('show');
+        } else {
+            $('#messageContent').text(message);
+            $('#messageModal').modal('show');
+        }
+    }
+
+    // // Example usage
+    // showMessage('success', 'Your message here');
+    // // hide modal
+    // $('#messageModal').modal('hide');
+</script>

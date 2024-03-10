@@ -186,7 +186,7 @@ class UserController extends Controller
 
         try {
             $data = $request->validated();
-            
+
             // Handle profile image upload
             if ($request->hasFile('profile_image')) {
                 $this->deleteOldProfileImage($user);
@@ -215,6 +215,7 @@ class UserController extends Controller
             $user->update($data);
 
             return redirect()->route('users.index')->with('success', 'User updated successfully');
+            // return redirect()->route('users.index')->with('modal', 'true');
         } catch (Exception $e) {
             return response()->json(['error' => 'Error updating user'], 500);
         }
@@ -245,10 +246,10 @@ class UserController extends Controller
                 $user->update(['profile_image' => null]);
 
                 // return redirect()->route('users.index')->with('success', 'Old pic deleted successfully');
-            // } else if($user->profile_image == 'default.jpg'){
-            //     return redirect()->route('users.index')->with('error', 'Default pic cannot be deleted');
-            // } else{
-            //     return redirect()->route('users.index')->with('error', 'No pic found to delete');
+                // } else if($user->profile_image == 'default.jpg'){
+                //     return redirect()->route('users.index')->with('error', 'Default pic cannot be deleted');
+                // } else{
+                //     return redirect()->route('users.index')->with('error', 'No pic found to delete');
             }
         } catch (Exception $e) {
             return redirect()->route('users.index')->with('error', 'Error deleting old pic');
@@ -272,16 +273,16 @@ class UserController extends Controller
 
         try {
             // $data = $request->validated();
-            
+
             // Handle profile image upload
             if ($request->hasFile('profile_image')) {
-                
+
                 // delete old pic before updating
                 $this->deleteOldProfileImage($user);
 
                 $file = $request->file('profile_image');
                 $filename = $this->generateFilename($file);
-                
+
                 /**
                  * 
                  * Store Image in Storage Folder
@@ -294,12 +295,12 @@ class UserController extends Controller
                  * $file->storeAs('public/upload/user_images', $filename, 's3');
                  * 
                  */
-                
+
                 // $file->move(public_path('upload/user_images'), $filename); // store in public
                 $file->storeAs('public', 'upload/user_images/' . $filename); // store in storage
-                
+
                 $data['profile_image'] = $filename;
-                
+
 
                 // // try if update doesn't work
                 // // Update the user's profile_image field in the database
