@@ -182,7 +182,6 @@
         // modal for change profile picture
         var updateProfileForm = document.getElementById('updateProfileForm');
         var userIdInput = document.getElementById('userId');
-        showMessage('info', 'Your info message here');   
 
         // Add event listener to update form action and modal title when the modal is shown
         $('#exampleModal').on('show.bs.modal', function(event) {

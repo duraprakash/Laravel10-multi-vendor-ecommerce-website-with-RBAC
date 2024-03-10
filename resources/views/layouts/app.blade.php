@@ -97,7 +97,7 @@
             <div class="container">
                 {{-- @include('flash-message') --}}
                 {{-- @include('errors.error-messages') <!-- Include the error messages partial --> --}}
-                @include('flash-modal-message')
+                @include('flash-modal')
             </div>
             @yield('content')
         </main>
@@ -114,30 +114,3 @@
 </body>
 
 </html>
-
-
-<script>
-    function showMessage(type, message) {
-        if (type == "error") {
-            $('#messageContent').text(message);
-            $('#messageModal').modal('show');
-        } else if (type == "success") {
-            $('#messageContentSuccess').text(message);
-            $('#messageModalSuccess').modal('show');
-        } else if (type == "warning") {
-            $('#messageContentWarning').text(message);
-            $('#messageModalWarning').modal('show');
-        } else if (type == "info") {
-            $('#messageContentInfo').text(message);
-            $('#messageModalInfo').modal('show');
-        } else {
-            $('#messageContent').text(message);
-            $('#messageModal').modal('show');
-        }
-    }
-
-    // // Example usage
-    // showMessage('success', 'Your message here');
-    // // hide modal
-    // $('#messageModal').modal('hide');
-</script>

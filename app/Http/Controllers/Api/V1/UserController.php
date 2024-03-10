@@ -288,7 +288,7 @@ class UserController extends Controller
                  * Store Image in Storage Folder
                  * $file->storeAs('public/upload/user_images', $filename);
                  * 
-                 * Store Image in Public Folder
+                 * Store Imaxge in Public Folder
                  * $file->move(public_path('public/upload/user_images'), $filename);
                  * 
                  * Store Image in S3
