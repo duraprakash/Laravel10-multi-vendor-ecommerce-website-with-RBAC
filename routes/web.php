@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\LoginController;
+use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\VendorController;
 use FontLib\Table\Type\name;
@@ -83,3 +84,19 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 // Route::get('/vendors', [VendorController::class, 'index'])->name('vendor.index');
+
+// products
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('v1/products')->group(function () {
+        // Route::get('/vendors', function () {
+        //     return 'hello vendor';
+        // });
+        Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+        Route::get('/products/create', [ProductController::class, 'create'])->name('products.create-product');
+        Route::post('/products/register', [ProductController::class, 'store'])->name('products.store-product');
+        Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit-product');
+        Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update-product');
+        Route::get('/products/{product}/delete', [ProductController::class, 'deleteProduct'])->name('products.delete-product');
+        Route::delete('/products/{product}', [ProductController::class, 'destroyProduct'])->name('products.destroy-product');
+    });
+});

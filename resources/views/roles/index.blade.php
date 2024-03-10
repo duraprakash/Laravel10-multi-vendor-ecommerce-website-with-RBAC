@@ -19,6 +19,7 @@
                     <a href="{{ route('roles.create-role') }}" class="btn btn-primary btn-responsive">Create New Role</a>
                     <a href="{{ route('users.index') }}" class="btn btn-primary btn-responsive">Users Management</a>
                     <a href="{{ route('vendors.index') }}" class="btn btn-primary btn-responsive">Vendor Management</a>
+                    <a href="{{ route('products.index') }}" class="btn btn-primary btn-responsive">Products Management</a>
                     @for ($i = 1; $i < 10; $i++)
                         <a href="{{ route('users.index') }}" class="btn btn-primary btn-responsive">Users Management</a>
                     @endfor

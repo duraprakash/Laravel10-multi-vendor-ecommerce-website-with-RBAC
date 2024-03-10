@@ -25,4 +25,12 @@ class Products extends Model
         'stock_quantity',
         'is_available',
     ];
+
+    /**
+     * Get the vendor that owns the product.
+     */
+    public function vendor()
+    {
+        return $this->belongsTo(Vendors::class, 'vendor_id');
+    }
 }

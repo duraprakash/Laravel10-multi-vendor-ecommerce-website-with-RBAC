@@ -3,52 +3,50 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\V1\Vendor\DeleteVendorRequest;
-use App\Http\Requests\V1\Vendor\UpdateVendorRequest;
-use App\Http\Resources\V1\Vendor\VendorResource;
+use App\Http\Requests\V1\Product\UpdateProductRequest;
+use App\Models\Products;
 use App\Models\User;
 use App\Models\Vendors;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Spatie\Permission\Models\Role;
 
-class VendorController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Vendors $vendor)
+    public function index(Products $product)
     {
-        $this->authorize('viewAny', $vendor);
+        $this->authorize('viewAny', $product);
+        $products = Products::all();
         $vendors = Vendors::all();
 
         // Ensure the authenticated user owns the customer
         // if (Auth::id() !== $user->user_id) {
         //     return response()->json(['error' => 'Unauthorized'], 403);
         // }
-        return view('vendors.index', compact('vendors'));
+        return view('products.index', compact('products', 'vendors'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Vendors $vendor)
+    public function create(Products $product)
     {
         try {
-            $this->authorize('create', $vendor);
-            // return redirect()->route('vendors.create-vendor')->with('success', 'Taking you to create form.');
-            return view('vendors.create-vendor', $vendor);
+            $this->authorize('create', $product);
+            $vendors = Vendors::all();
+            return view('products.create-product', compact('product', 'vendors'));
         } catch (Exception $e) {
-            return response()->json(['error' => 'Error creating user'], 500);
+            return response()->json(['error' => 'Error creating product'], 500);
         }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, Role $role)
+    public function store(Request $request)
     {
         try {
             /**
@@ -70,84 +68,83 @@ class VendorController extends Controller
             /**
              * Code for working directly with the Eloquent model
              */
-            // Check if the authenticated user has the 'create vendor' permission
-            $this->authorize('create', Vendors::class);
+            // Check if the authenticated user has the 'create product' permission
+            $this->authorize('create', Products::class);
 
             // Create a new instance of the Vendors model
-            $newVendor = new Vendors($request->all());
-            $newVendor->user_id = auth()->user()->id; // Associate the vendor with the currently authenticated user
-            $newVendor->save();
+            $newProduct = new Products($request->all());
+            // $newProduct->vendor_id; // = auth()->user()->id; // Associate the vendor with the currently authenticated user
+            $newProduct->save();
 
-            return Redirect::route('vendors.index')->with('success', 'Vendor created successfully');
+            return Redirect::route('products.index')->with('success', 'Product created successfully');
         } catch (Exception $e) {
             // return response()->json(['error' => 'Failed to create vendor',  $e], 500);
-            return Redirect::route('vendors.index')->with('error', 'Failed to create vendor');
+            return Redirect::route('products.create-product')->with('error', 'Failed to create product');
         }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Vendors $vendor)
+    public function show(string $id)
     {
-        return new VendorResource($vendor);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vendors $vendor)
+    public function edit(Products $product)
     {
-        $this->authorize('update', $vendor);
+        $this->authorize('update', $product);
 
         $user = User::all();
-        return view('vendors.edit-vendor', compact('user', 'vendor'));
-        // return view('users.edit-user', compact('user', 'roles'));
+        $vendors = Vendors::all();
+        return view('products.edit-product', compact('user', 'product', 'vendors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVendorRequest $request, Vendors $vendor)
+    public function update(UpdateProductRequest $request, Products $product)
     {
-        // return 'vendor update';
-
         try {
-            $this->authorize('update', $vendor);
+            $this->authorize('update', $product);
 
             // Update the user details
-            $vendor->update($request->validated());
+            $product->update($request->validated());
 
 
             // Respond with the updated vendor resource
-            return Redirect::route('vendors.index')->with('success', 'Vendor updated successfully');
+            return Redirect::route('products.index')->with('success', 'Product updated successfully');
         } catch (\Exception $e) {
             // Handle any errors during the update
-            return response()->json(['error' => 'Error updating vendor'], 500);
+            // return response()->json(['error' => 'Error updating product'], 500);
+            return response()->json(['error' => $e], 500);
+            // return Redirect::route('products.index')->with('error', 'Failed to update product');
         }
     }
 
-
-    public function deleteVendor(Vendors $vendor)
+    public function deleteProduct(Products $product)
     {
-        $this->authorize('delete', $vendor);
+        $this->authorize('delete', $product);
 
-        return view('vendors.delete-vendor', compact('vendor'));
+        return view('products.delete-product', compact('product'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroyVendor(DeleteVendorRequest $request, Vendors $vendor)
+    public function destroyProduct(Products $product)
     {
         try {
             // Delete the vendor
-            $vendor->delete();
+            $product->delete();
 
-            return redirect()->route('vendors.index')->with('success', 'vendor deleted successfully.');
+            return redirect()->route('products.index')->with('success', 'product deleted successfully.');
         } catch (\Exception $e) {
             // Handle any errors during deletion
-            return response()->json(['error' => 'Error deleting vendor'], 500);
+            return response()->json(['error' => 'Error deleting product'], 500);
         }
     }
 }
