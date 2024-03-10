@@ -72,6 +72,17 @@ class RealSeed extends Seeder
                     'vendor.approve',
                 ]
             ],
+            [
+                'group_name' => 'product',
+                'permissions' => [
+                    // role Permissions
+                    'product.create',
+                    'product.view',
+                    'product.edit',
+                    'product.delete',
+                    'product.approve',
+                ]
+            ],
         ];
 
         // Insert the permisison with group in the database
