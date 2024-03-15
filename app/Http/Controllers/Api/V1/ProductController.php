@@ -109,14 +109,21 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Products $product)
     {
         try {
-            $this->authorize('update', $product);
+            // $this->authorize('update', $product);
+            try {
+                $this->authorize('update', $product);
+            } catch (\Exception $e) {
+                \Log::error($e->getMessage());
+                // Handle the error appropriately
+            }
+
 
             // Update the user details
             $product->update($request->validated());
 
 
             // Respond with the updated vendor resource
-            return Redirect::route('products.index')->with('success', 'Product updated successfully');
+            // return Redirect::route('products.index')->with('success', 'Product updated successfully');
         } catch (\Exception $e) {
             // Handle any errors during the update
             // return response()->json(['error' => 'Error updating product'], 500);

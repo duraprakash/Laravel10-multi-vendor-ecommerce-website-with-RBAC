@@ -13,7 +13,11 @@
 
             <div class="mb-4">
                 <a href="{{ route('roles.index') }}" class="btn btn-danger">Go Back</a>
-                <a href="{{ route('products.create-product') }}" class="btn btn-success">Create New Product</a>
+                @foreach ($products as $product)
+                    @can('create', $product)
+                        <a href="{{ route('products.create-product') }}" class="btn btn-success">Create New Product</a>
+                    @endcan
+                @endforeach
             </div>
             <table class="table">
                 <thead>
