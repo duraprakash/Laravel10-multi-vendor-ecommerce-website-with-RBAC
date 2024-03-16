@@ -22,7 +22,7 @@ class RoleController extends Controller
         $roles = Role::all();
         $permissionsByGroup = Permission::all()->groupBy('group_name');
 
-        return view('roles.index', compact('roles', 'permissionsByGroup'));
+        return view('roles.index', compact('roles', 'permissionsByGroup', 'role'));
     }
 
     public function createRole(Role $role)
@@ -79,13 +79,13 @@ class RoleController extends Controller
     public function deleteRole(Role $role)
     {
         $this->authorize('delete', $role);
-        // return view('roles.delete-role', compact('role'));
+        return view('roles.delete-role', compact('role'));
     }
 
     public function destroyRole(Role $role)
     {
         $this->authorize('delete', $role);
-        // $role->delete();
+        $role->delete();
 
         // return Redirect::route('admin.index');
         return redirect()->route('roles.index')->with('success', 'Role deleted successfully.');

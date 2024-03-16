@@ -15,8 +15,9 @@
                         <a href="{{ route('users.index') }}" class="btn btn-primary btn-responsive">Users
                             Management{{ $i }}</a>
                     @endfor --}}
-
-                    <a href="{{ route('roles.create-role') }}" class="btn btn-primary btn-responsive">Create New Role</a>
+                    @can('create', $role)
+                        <a href="{{ route('roles.create-role') }}" class="btn btn-primary btn-responsive">Create New Role</a>
+                    @endcan
                     <a href="{{ route('users.index') }}" class="btn btn-primary btn-responsive">Users Management</a>
                     <a href="{{ route('vendors.index') }}" class="btn btn-primary btn-responsive">Vendor Management</a>
                     <a href="{{ route('products.index') }}" class="btn btn-primary btn-responsive">Products Management</a>
@@ -44,9 +45,14 @@
                                     <li>{{ $permission->name }}</li>
                                 @endforeach
                             </ul>
-                            <a href="{{ route('roles.edit-role', $role->id) }}" class="btn btn-warning">Edit Role</a>
-                            <a href="{{ route('roles.delete-role', $role->id) }}" class="btn btn-danger">Delete
-                                Role</a>
+
+                            @can('update', $role)
+                                <a href="{{ route('roles.edit-role', $role->id) }}" class="btn btn-warning">Edit Role</a>
+                            @endcan
+                            @can('delete', $role)
+                                <a href="{{ route('roles.delete-role', $role->id) }}" class="btn btn-danger">Delete
+                                    Role</a>
+                            @endcan
                             {{-- <!-- Update the "Delete Role" button in your Blade file -->
                             <a href="#" onclick="confirmDelete('{{ $role->name }}', {{ $role->id }})"
                                 class="btn btn-danger">Delete Role</a> --}}

@@ -34,8 +34,7 @@
                         value="{{ $vendor->verification_status }}" required>
                 </div>
 
-                @can('update', \App\Models\Vendors::class)
-                    {{-- @can('create', $vendor) --}}
+                @can('update', $vendor)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Update Vendor</button>
                     </div>

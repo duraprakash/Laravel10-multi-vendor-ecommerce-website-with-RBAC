@@ -49,8 +49,7 @@
                     </select>
                 </div>
 
-                @can('create', \App\Models\Products::class)
-                    {{-- @can('create', $vendor) --}}
+                @can('create', $product)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Create Product</button>
                     </div>

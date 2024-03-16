@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                @can('update', \App\Models\User::class)
+                @can('update', $user)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Update User</button>
                     </div>

@@ -28,7 +28,7 @@ class VendorController extends Controller
         // if (Auth::id() !== $user->user_id) {
         //     return response()->json(['error' => 'Unauthorized'], 403);
         // }
-        return view('vendors.index', compact('vendors'));
+        return view('vendors.index', compact('vendors', 'vendor'));
     }
 
     /**
@@ -39,7 +39,7 @@ class VendorController extends Controller
         try {
             $this->authorize('create', $vendor);
             // return redirect()->route('vendors.create-vendor')->with('success', 'Taking you to create form.');
-            return view('vendors.create-vendor', $vendor);
+            return view('vendors.create-vendor', compact('vendor'));
         } catch (Exception $e) {
             return response()->json(['error' => 'Error creating user'], 500);
         }

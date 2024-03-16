@@ -1,6 +1,3 @@
-<h1>hello vendor create form</h1>
-Company Name Contact Person Name Description Verification Status
-
 <div>
     <!-- Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less. - Marie Curie -->
     @extends('layouts.app')
@@ -31,8 +28,7 @@ Company Name Contact Person Name Description Verification Status
                     <input type="text" class="form-control" id="verification-status" name="verification_status" required>
                 </div>
 
-                @can('create', \App\Models\Vendors::class)
-                    {{-- @can('create', $vendor) --}}
+                @can('create', $vendor)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Create Vendor</button>
                     </div>

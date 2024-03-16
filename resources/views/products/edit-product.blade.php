@@ -56,7 +56,7 @@
                     </select>
                 </div>
 
-                @can('update', \App\Models\Products::class)
+                @can('update', $product)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Update Product</button>
                     </div>

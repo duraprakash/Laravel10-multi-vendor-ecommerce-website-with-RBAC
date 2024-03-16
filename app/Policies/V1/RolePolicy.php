@@ -32,7 +32,7 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->hasPermissionTo('vendor.create');
+        return $user->hasPermissionTo('role.create');
     }
 
     /**

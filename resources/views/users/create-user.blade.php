@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                @can('create', \App\Models\User::class)
+                @can('create', $user)
                     <div class="mb-4 mt-3">
                         <button type="submit" class="btn btn-primary">Create User</button>
                     </div>

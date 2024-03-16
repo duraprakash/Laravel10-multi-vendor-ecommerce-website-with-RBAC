@@ -26,7 +26,7 @@ class ProductController extends Controller
         // if (Auth::id() !== $user->user_id) {
         //     return response()->json(['error' => 'Unauthorized'], 403);
         // }
-        return view('products.index', compact('products', 'vendors'));
+        return view('products.index', compact('products', 'vendors', 'product'));
     }
 
     /**

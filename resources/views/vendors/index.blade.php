@@ -34,17 +34,16 @@
             <h1>Vendor Management</h1>
             @auth
                 @php
-                    $userRoles = auth()
-                        ->user()
-                        ->getRoleNames()
-                        ->toArray();
+                    $userRoles = auth()->user()->getRoleNames()->toArray();
                 @endphp
                 <p>User Role: {{ implode(', ', $userRoles) }}</p>
             @endauth
 
             <div class="mb-4">
                 <a href="{{ route('roles.index') }}" class="btn btn-danger">Go Back</a>
-                <a href="{{ route('vendors.create-vendor') }}" class="btn btn-success">Create New Vendor</a>
+                @can('create', $vendor)
+                    <a href="{{ route('vendors.create-vendor') }}" class="btn btn-success">Create New Vendor</a>
+                @endcan
             </div>
             <table class="table">
                 <thead>
